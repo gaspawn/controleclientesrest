@@ -2,8 +2,8 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from rest_framework import viewsets
-from rest_framework import permissions
+from rest_framework import viewsets, permissions
+from rest_framework.views import APIView
 from agendamentos.models import Pessoa, Atendente, Agendamento, Servico
 from agendamentos.api.serializers import PessoaSerializer, ServicoSerializer, AtendenteSerializer, AgendamentoSerializer
 
@@ -31,3 +31,11 @@ class ServicoViewSet(viewsets.ModelViewSet):
     serializer_class = ServicoSerializer
     #permission_classes = [permissions.IsAuthenticated]
 
+
+
+""" 
+Para criar APIS personalizadas para o Django Rest Framework, não derivadas do ModelViewSet diretamente
+"""
+class TesteApi(APIView):
+    def get(self, request, format=None):
+        return JsonResponse({'message':'Hello World'})
