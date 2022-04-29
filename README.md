@@ -18,7 +18,8 @@
 ## Referências:
 * https://www.youtube.com/watch?v=wtl8ZyCbTbg (ensina criação básica da api com django)
 * https://simpleisbetterthancomplex.com/tutorial/2018/12/19/how-to-use-jwt-authentication-with-django-rest-framework.html (tutorial usado para autenticação)
-
+* https://suyojtamrakar.medium.com/how-to-provide-initial-data-in-django-models-2422aaf3c09a (popular banco inicial)
+* https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html (usuário padrão com mais atributos)
 
 ### Documentação oficial 
 * https://www.django-rest-framework.org/#requirements

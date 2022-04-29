@@ -4,8 +4,8 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from rest_framework import viewsets, permissions
 from rest_framework.views import APIView
-from agendamentos.models import Pessoa, Atendente, Agendamento, Servico
-from agendamentos.api.serializers import PessoaSerializer, ServicoSerializer, AtendenteSerializer, AgendamentoSerializer
+from agendamentos.models import Pessoa, Agendamento, Servico
+from agendamentos.api.serializers import PessoaSerializer, ServicoSerializer, AgendamentoSerializer
 
 
 from agendamentos.api import serializers
@@ -16,10 +16,6 @@ class PessoaViewSet(viewsets.ModelViewSet):
     serializer_class = PessoaSerializer
     #permission_classes = [permissions.IsAuthenticated]
 
-class AtendenteViewSet(viewsets.ModelViewSet):
-    queryset = Atendente.objects.all()
-    serializer_class = AtendenteSerializer
-    #permission_classes = [permissions.IsAuthenticated]
 
 class AgendamentoViewSet(viewsets.ModelViewSet):
     queryset = Agendamento.objects.all()

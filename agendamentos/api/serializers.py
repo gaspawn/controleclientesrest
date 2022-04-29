@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from agendamentos.models import Pessoa, Atendente, Agendamento, Servico
+from agendamentos.models import Pessoa, Agendamento, Servico
 
 
 class PessoaSerializer(serializers.ModelSerializer):
@@ -13,13 +13,6 @@ class ServicoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Servico
         #fields = ('id', 'nome', 'descricao', 'duracao_prevista', 'ativo')
-        fields = '__all__'
-
-
-class AtendenteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Atendente
-        #fields = ('id', 'nome')
         fields = '__all__'
 
 class AgendamentoSerializer(serializers.ModelSerializer):
