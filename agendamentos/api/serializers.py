@@ -5,8 +5,8 @@ from agendamentos.models import Pessoa, Agendamento, Servico
 class PessoaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pessoa
-        #fields = ('id', 'cpf', 'nome', 'endereco', 'nascimento', 'telefone', 'email')
-        fields = '__all__'
+        fields = ('username','cpf', 'first_name','last_name', 'endereco', 'nascimento', 'telefone', 'email','is_atendente','is_gerente','password')
+        #fields = '__all__'
 
 
 class ServicoSerializer(serializers.ModelSerializer):
