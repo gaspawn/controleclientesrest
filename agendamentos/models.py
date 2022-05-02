@@ -15,12 +15,20 @@ class Pessoa(AbstractUser):
     telefone = models.CharField(max_length=15,null=True)    
     is_atendente = models.BooleanField(default=False)
     is_gerente = models.BooleanField(default=False)
+    new_password = models.CharField(max_length=20, null=True)
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
     
     def nome_completo(self)->str:
         return self.first_name + ' ' + self.last_name
+    
+    #Override na função save para criar um novo usuário setando a senha e escondendo atributo de password
+    def save(self, *args, **kwargs):
+        if len(self.new_password) > 0:
+            self.set_password(self.new_password)
+            self.new_password = None
+        super().save(*args, **kwargs)
 
 
 class Servico(models.Model):

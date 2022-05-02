@@ -10,6 +10,9 @@ router.register(r'pessoas', PessoaViewSet, basename='pessoa')
 router.register(r'servicos', ServicoViewSet, basename='servico')
 router.register(r'agendamentos', AgendamentoViewSet, basename='agendamento')
 
+
+
+
 urlpatterns = [
     path('teste', TesteApi.as_view(), name='teste'),
     #path('token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),

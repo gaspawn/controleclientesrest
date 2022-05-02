@@ -20,7 +20,7 @@
 * https://simpleisbetterthancomplex.com/tutorial/2018/12/19/how-to-use-jwt-authentication-with-django-rest-framework.html (tutorial usado para autenticação)
 * https://suyojtamrakar.medium.com/how-to-provide-initial-data-in-django-models-2422aaf3c09a (popular banco inicial)
 * https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html (usuário padrão com mais atributos)
-
+* https://django-rest-framework-simplejwt.readthedocs.io/en/latest/customizing_token_claims.html (customizar as claws do token)
 ### Documentação oficial 
 * https://www.django-rest-framework.org/#requirements
 * https://www.django-rest-framework.org/tutorial/quickstart/
