@@ -25,7 +25,7 @@ class Pessoa(AbstractUser):
     
     #Override na função save para criar um novo usuário setando a senha e escondendo atributo de password
     def save(self, *args, **kwargs):
-        if len(self.new_password) > 0:
+        if self.new_password is not None and len(self.new_password) > 0:
             self.set_password(self.new_password)
             self.new_password = None
         super().save(*args, **kwargs)
