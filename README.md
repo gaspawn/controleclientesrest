@@ -23,6 +23,7 @@
 * https://django-rest-framework-simplejwt.readthedocs.io/en/latest/customizing_token_claims.html (customizar as claws do token)
 * https://medium.com/sulang/testing-django-rest-framework-d98279a5d3a5 (teste de software)
 * https://www.django-rest-framework.org/api-guide/testing/#creating-test-requests (teste de software)
+* https://www.youtube.com/watch?v=8l8xwvRO1_U (deploy no heroku)
 
 ### Documentação oficial 
 * https://www.django-rest-framework.org/#requirements
