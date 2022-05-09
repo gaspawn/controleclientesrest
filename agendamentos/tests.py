@@ -1,25 +1,26 @@
 from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APITestCase, APIRequestFactory
+from agendamentos.models import Servico
 
 # Create your tests here.
 
 class TestsExemplo(APITestCase):
-    def test_create_account(self):
+    def test_database_save(self):
         """
-        Modelo de Teste para o sistema
+        Teste de Acesso ao banco de dados
         """
-        #url = reverse('account-list')
-        #data = {'name': 'DabApps'}
-        #response = self.client.post(url, data, format='json')
-        #self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        #self.assertEqual(Account.objects.count(), 1)
-        #self.assertEqual(Account.objects.get().name, 'DabApps')
-        self.assertEqual(2, 2)
+        servico = Servico()
+        servico.nome = "Teste"
+        servico.descricao = "Teste"
+        servico.save()
+        var_teste = Servico.objects.first()
+        self.assertEqual(var_teste.nome, "Teste")
+        
 
-    def test_chamada_pessoas(self):
+    def test_chamada_endpoint(self):
         """
-        Modelo de Teste para simples Get em pessoas
+        Teste de servidor e API - Verificar se a API esta funcionando
         """
         #factory = APIRequestFactory()
         #request = factory.get('/api/pessoas/')
