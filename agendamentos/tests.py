@@ -24,8 +24,7 @@ class TestsExemplo(APITestCase):
          p.email = "teste@teste.com"
          p.new_password = "teste"
          p.save()
-         result = self.client.get(path='/api/pessoas/')
+         result = self.client.get(path='/api/pessoas/') 
          self.assertNotEqual(result.status_code, status.HTTP_200_OK)
 
         
-    
