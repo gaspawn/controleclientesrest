@@ -1,38 +1,47 @@
+from datetime import datetime
+import urllib
+
 #from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+
 from rest_framework.parsers import JSONParser
 from rest_framework import viewsets, permissions
 from rest_framework.views import APIView
-from agendamentos.models import Pessoa, Agendamento, Servico
-from agendamentos.api.serializers import PessoaSerializer, ServicoSerializer, AgendamentoSerializer
 from rest_framework import status
-from rest_framework.permissions import DjangoObjectPermissions
+from rest_framework.permissions import DjangoObjectPermissions, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
-import urllib
-from datetime import datetime
 
-
+from agendamentos.api.permissions import IsGerente, IsAtendente, IsValidClientAction
 from agendamentos.api import serializers
-
+from agendamentos.models import Pessoa, Agendamento, Servico
+from agendamentos.api.serializers import PessoaSerializer, ServicoSerializer, AgendamentoSerializer
 
 class PessoaViewSet(viewsets.ModelViewSet):
     queryset = Pessoa.objects.all()
     serializer_class = PessoaSerializer
     #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsValidClientAction]
+    
 
 
 class AgendamentoViewSet(viewsets.ModelViewSet):
+    """
+      Agendamento de clientes, permite dois filtros 
+      1- dia: filtra a agenda para o dia especifico no formato YYYY-MM-DD
+      2- pessoa: filtra os agendamentos para o cliente especifico por id
+    """
     #queryset = Agendamento.objects.all()
     serializer_class = AgendamentoSerializer
-    #permission_classes = [permissions.IsAuthenticated]    
+    permission_classes = [permissions.IsAuthenticated, IsValidClientAction]    
     def get_queryset(self):
         """
         Sobrescre o metodo get para aceitar o parametro dia no intuito de filtrar a agenda para o dia especifico
         """
         queryset = Agendamento.objects.all()
         dia = self.request.query_params.get('dia', None).replace('/','')
+        pessoa = self.request.query_params.get('client', None)
         if dia is not None:
             try:
                 dia = urllib.parse.unquote(dia)
@@ -41,12 +50,15 @@ class AgendamentoViewSet(viewsets.ModelViewSet):
                 queryset = queryset.filter(dia=dt)
             except:
                 raise serializers.ValidationError('Dia invalido')
+        if pessoa is not None:
+            queryset = queryset.filter(pessoa=pessoa)
+        
         return queryset
 
 class ServicoViewSet(viewsets.ModelViewSet):
     queryset = Servico.objects.all()
     serializer_class = ServicoSerializer
-    #permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticated, IsValidClientAction]
 
 
 
