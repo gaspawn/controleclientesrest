@@ -13,7 +13,7 @@ from rest_framework.permissions import DjangoObjectPermissions, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from agendamentos.api.permissions import IsGerente, IsAtendente, IsValidClientAction
+from agendamentos.api.permissions import IsValidClientAction
 from agendamentos.api import serializers
 from agendamentos.models import Pessoa, Agendamento, Servico
 from agendamentos.api.serializers import PessoaSerializer, ServicoSerializer, AgendamentoSerializer

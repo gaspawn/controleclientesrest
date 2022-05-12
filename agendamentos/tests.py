@@ -1,7 +1,7 @@
 from django.test import TestCase
 from rest_framework import status
 from rest_framework.test import APITestCase, APIRequestFactory
-from agendamentos.models import Servico
+from agendamentos.models import Servico, Pessoa
 
 # Create your tests here.
 
@@ -16,18 +16,16 @@ class TestsExemplo(APITestCase):
         servico.save()
         var_teste = Servico.objects.first()
         self.assertEqual(var_teste.nome, "Teste")
-        
+           
 
-    def test_chamada_endpoint(self):
-        """
-        Teste de servidor e API - Verificar se a API esta funcionando
-        """
-        #factory = APIRequestFactory()
-        #request = factory.get('/api/pessoas/')
-        result = self.client.get(path='/api/pessoas/')
-        print("Resultado do get:")
-        print(result.data)
-        self.assertEqual(result.status_code, status.HTTP_200_OK)
-
+    def bloqueio_listagem_clientes_sem_autenticacao(self):
+         p = Pessoa()
+         p.nome = "Teste"  
+         p.email = "teste@teste.com"
+         p.new_password = "teste"
+         p.save()
+         result = self.client.get(path='/api/pessoas/')
+         self.assertNotEqual(result.status_code, status.HTTP_200_OK)
 
         
+    
