@@ -84,12 +84,12 @@ class Agenda(APIView):
 
 """ 
 Para criar APIS personalizadas para o Django Rest Framework, não derivadas do ModelViewSet diretamente
-"""
+#Exemplo ApiView
 class TesteApi(APIView):
     def get(self, request, format=None):
         return JsonResponse({'message':'Hello World'})
 
-""" Exemplo de generic view para implementar compativel com router e documentação 
+# Exemplo de generic view para implementar compativel com router e documentação 
 class ItemViewSet(GenericViewSet):
     serializer_class = ItemSerializer
     queryset = Item.objects.all()
