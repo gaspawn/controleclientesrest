@@ -13,7 +13,10 @@
 * python manage.py migrate  --> executa no banco o código gerado pelo makemigrations
 * python manage.py createsuperuser  --> cria o usuário para administração do sistema
 
-
+##Configurando o sistema
+criar na raiz do sistema arquivo .env com suas configurações
+* Exemplo: DEBUG=True
+           AUTENTICAR=True
 
 ## Referências:
 * https://www.youtube.com/watch?v=wtl8ZyCbTbg (ensina criação básica da api com django)
