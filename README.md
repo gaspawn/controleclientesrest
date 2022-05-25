@@ -14,7 +14,7 @@
 * python manage.py createsuperuser  --> cria o usuário para administração do sistema
 
 ##Configurando o sistema
-criar na raiz do sistema arquivo .env com suas configurações
+Para configurar o ambiente local é preciso criar na raiz do sistema arquivo .env com suas configurações
 * Exemplo: DEBUG=True
            AUTENTICAR=True
 

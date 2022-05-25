@@ -18,11 +18,12 @@ from agendamentos.api import serializers
 from agendamentos.models import Pessoa, Agendamento, Servico
 from agendamentos.api.serializers import PessoaSerializer, ServicoSerializer, AgendamentoSerializer
 
+from decouple import config
+
 class PessoaViewSet(viewsets.ModelViewSet):
     queryset = Pessoa.objects.all()
     serializer_class = PessoaSerializer
-    #permission_classes = [permissions.IsAuthenticated]
-    permission_classes = [IsValidClientAction]
+    permission_classes = [IsValidClientAction] if config('AUTENTICAR', default=False, cast=bool) else []
     
 
 
@@ -34,7 +35,7 @@ class AgendamentoViewSet(viewsets.ModelViewSet):
     """
     #queryset = Agendamento.objects.all()
     serializer_class = AgendamentoSerializer
-    permission_classes = [permissions.IsAuthenticated, IsValidClientAction]    
+    permission_classes = [permissions.IsAuthenticated, IsValidClientAction]  if config('AUTENTICAR', default=False, cast=bool) else []
     def get_queryset(self):
         """
         Sobrescre o metodo get para aceitar o parametro dia no intuito de filtrar a agenda para o dia especifico
@@ -58,7 +59,7 @@ class AgendamentoViewSet(viewsets.ModelViewSet):
 class ServicoViewSet(viewsets.ModelViewSet):
     queryset = Servico.objects.all()
     serializer_class = ServicoSerializer
-    permission_classes = [permissions.IsAuthenticated, IsValidClientAction]
+    permission_classes = [permissions.IsAuthenticated, IsValidClientAction] if config('AUTENTICAR', default=False, cast=bool) else []
 
 
 
