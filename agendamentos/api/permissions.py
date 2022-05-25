@@ -13,6 +13,7 @@ class IsValidClientAction(permissions.BasePermission):
 
     def has_permission(self, request, view):
         if not config('AUTENTICAR', default=False, cast=bool):
+            print("Autenticação desabilitada, habilitar em settings.py AUTENTICAR")
             return True
         if request.user.is_authenticated:
             if request.user.is_gerente or request.user.is_atendente or request.user.is_superuser:
