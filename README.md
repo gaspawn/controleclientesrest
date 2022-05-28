@@ -27,6 +27,7 @@ Para configurar o ambiente local é preciso criar na raiz do sistema arquivo .en
 * https://medium.com/sulang/testing-django-rest-framework-d98279a5d3a5 (teste de software)
 * https://www.django-rest-framework.org/api-guide/testing/#creating-test-requests (teste de software)
 * https://www.youtube.com/watch?v=8l8xwvRO1_U (deploy no heroku)
+* https://github.com/adamchainz/django-cors-headers (desabilitar cors para api)
 
 ### Documentação oficial 
 * https://www.django-rest-framework.org/#requirements

@@ -41,10 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework_simplejwt',
+    'corsheaders',
     'agendamentos'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -136,5 +138,8 @@ REST_FRAMEWORK = {
 
 #configurações para usar model Pessoa como user de logon
 AUTH_USER_MODEL = 'agendamentos.Pessoa'
+
+#Permite Cors de qualquer site, sem bloqueio de origem
+CORS_ALLOW_ALL_ORIGINS = True
 
 django_on_heroku.settings(locals())
