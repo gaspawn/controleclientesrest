@@ -41,9 +41,10 @@ class AgendamentoViewSet(viewsets.ModelViewSet):
         Sobrescre o metodo get para aceitar o parametro dia no intuito de filtrar a agenda para o dia especifico
         """
         queryset = Agendamento.objects.all()
-        dia = self.request.query_params.get('dia', None).replace('/','')
+        dia = self.request.query_params.get('dia', None)
         pessoa = self.request.query_params.get('client', None)
         if dia is not None:
+            #dia = dia.replace('/','') -> não utilizar formato  com barras
             try:
                 dia = urllib.parse.unquote(dia)
                 dt = str.split(dia,"T")[0]
