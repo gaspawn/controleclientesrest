@@ -29,7 +29,8 @@ class PessoaViewSet(viewsets.ModelViewSet):
 
 class AgendamentoViewSet(viewsets.ModelViewSet):
     """
-      Agendamento de clientes, permite dois filtros 
+      Agendamento de clientes, permite dois filtros, filtros passados como parametro 
+      *** exemplo: localhost/api/agendamentos/?pessoa=1 ou localhost/api/agendamentos/?dia=2019-01-01  ***
       1- dia: filtra a agenda para o dia especifico no formato YYYY-MM-DD
       2- pessoa: filtra os agendamentos para o cliente especifico por id
     """
@@ -42,7 +43,7 @@ class AgendamentoViewSet(viewsets.ModelViewSet):
         """
         queryset = Agendamento.objects.all()
         dia = self.request.query_params.get('dia', None)
-        pessoa = self.request.query_params.get('client', None)
+        pessoa = self.request.query_params.get('pessoa', None)
         if dia is not None:
             #dia = dia.replace('/','') -> não utilizar formato  com barras
             try:
@@ -53,7 +54,7 @@ class AgendamentoViewSet(viewsets.ModelViewSet):
             except:
                 raise serializers.ValidationError('Dia invalido')
         if pessoa is not None:
-            queryset = queryset.filter(pessoa=pessoa)
+            queryset = queryset.filter(pessoa__id=pessoa)
         
         return queryset
 
