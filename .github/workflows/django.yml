@@ -27,5 +27,5 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        apt install sqlite3
+        apt install sqlite3 
         python manage.py test
