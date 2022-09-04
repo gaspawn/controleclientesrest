@@ -142,4 +142,5 @@ AUTH_USER_MODEL = 'agendamentos.Pessoa'
 #Permite Cors de qualquer site, sem bloqueio de origem
 CORS_ALLOW_ALL_ORIGINS = True
 
-django_on_heroku.settings(locals())
+#Com fina das contas free e problemas no githubactions foidesabilitado temporariamente
+#django_on_heroku.settings(locals())
