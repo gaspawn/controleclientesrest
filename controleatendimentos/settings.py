@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import django_on_heroku
 from decouple import config
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-zq_!53%69$*rd4aryk8u7*n9=7wx6d0ds88r+7k^x&4$%t))^=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['127.0.0.1','.localhost','[::1]']
+ALLOWED_HOSTS = ['127.0.0.1','.localhost','[::1]','.vercel.app','.now.sh']
 
 
 # Application definition
@@ -81,10 +82,10 @@ WSGI_APPLICATION = 'controleatendimentos.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
 }
 
 
@@ -144,3 +145,6 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 #Com fina das contas free e problemas no githubactions foidesabilitado temporariamente
 #django_on_heroku.settings(locals())
+
+STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
