@@ -23,15 +23,5 @@
       "src": "/(.*)",
       "dest": "controleatendimentos/wsgi.py"
     }
-  ],
-  "rewrites": [
-    { "source": "/user/register/(.*)", "destination": "/user/register" },
-    { "source": "/user/login/(.*)", "destination": "/user/login" },
-    { "source": "/user/checkuser/(.*)", "destination": "/user/checkuser" },
-    { "source": "/user/:id", "destination": "/user/checkuser" },
-    { "source": "/user/edit/:id", "destination": "/user/edit" },
-    { "source": "/list/(.*)", "destination": "/list" },
-    { "source": "/list/:id", "destination": "/list" },
-    { "source": "/list/:id/item", "destination": "/list/item" }
   ]
 }
