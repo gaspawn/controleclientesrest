@@ -1,5 +1,6 @@
-from datetime import datetime
+from datetime import datetime,date
 import urllib
+import json
 
 #from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
@@ -15,8 +16,8 @@ from rest_framework.viewsets import GenericViewSet
 
 from agendamentos.api.permissions import IsValidClientAction
 from agendamentos.api import serializers
-from agendamentos.models import Pessoa, Agendamento, Servico
-from agendamentos.api.serializers import PessoaSerializer, ServicoSerializer, AgendamentoSerializer
+from agendamentos.models import Pessoa, Agendamento, Servico, HistoricoPontosPessoa
+from agendamentos.api.serializers import PessoaSerializer, ServicoSerializer, AgendamentoSerializer, HistoricoPontosPessoaSerializer, SaldoPontosManagerSerializer 
 
 from decouple import config
 
@@ -30,7 +31,8 @@ class PessoaViewSet(viewsets.ModelViewSet):
 class AgendamentoViewSet(viewsets.ModelViewSet):
     """
       Agendamento de clientes, permite dois filtros, filtros passados como parametro 
-      *** exemplo: localhost/api/agendamentos/?pessoa=1 ou localhost/api/agendamentos/?dia=2019-01-01  ***
+      *** exemplo: localhost/api/agendamentos/?
+      pessoa=1 ou localhost/api/agendamentos/?dia=2019-01-01  ***
       1- dia: filtra a agenda para o dia especifico no formato YYYY-MM-DD
       2- pessoa: filtra os agendamentos para o cliente especifico por id
     """
@@ -64,8 +66,63 @@ class ServicoViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated, IsValidClientAction] if config('AUTENTICAR', default=False, cast=bool) else []
 
 
+class HistoricoPontosPessoaViewSet(viewsets.ModelViewSet):
+    queryset = HistoricoPontosPessoa.objects.all() 
+    serializer_class = HistoricoPontosPessoaSerializer
+    permission_classes = [permissions.IsAuthenticated, IsValidClientAction] if config('AUTENTICAR', default=False, cast=bool) else []
 
-class Agenda(APIView):
+
+
+class SaldoPontosManager(viewsets.ViewSet):
+    serializer_class = SaldoPontosManagerSerializer
+    http_method_names = ["get"]
+
+    """ Realiza o processamento do saldo trazendo serviços 
+            realizados e adicionando a tabela de Historico de Pontos
+            É um gatilho ao processamento do saldo.
+            ** pk é o id da pessoa
+    """
+    def retrieve(self, request, pk=None):          
+        hoje = date.today()      
+        pessoa = Pessoa.objects.get(pk=pk)
+        agendamentos = Agendamento.objects.filter(pessoa=pk,pontuacaoProcessada=False,dia__lte=hoje)
+        #filta os agendamentos da pessoa que ainda não foram processados e que a data já tenha sido superada
+    
+        #transfere e converte os agendamentos em pontuação e ativa flag de pontuacaoprocessada
+        for agendamento in agendamentos:
+            agendamento.pontuacaoProcessada = True
+            novoHistorico = HistoricoPontosPessoa(dia=hoje,pessoa=pessoa,pontos=agendamento.pontos,descricao=agendamento.descricao + " em " + agendamento.dia)
+            agendamento.save()
+            novoHistorico.save()
+
+        #processa calculo de pontos
+        historicoPontos = HistoricoPontosPessoa.objects.filter(pessoa=pk)        
+        saldo = 0
+        for historico in historicoPontos:
+            saldo += historico.pontos
+
+        #resultado = json.dumps()
+        return Response(status=status.HTTP_200_OK, data={'id':pk,'saldo':saldo})                
+
+    def list(self, request):
+        return Response(status=status.HTTP_200_OK)
+
+    def create(self, request):
+        return Response(status=status.HTTP_400_BAD_REQUEST)   
+
+    def update(self, request, pk=None):
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    def partial_update(self, request, pk=None):
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, pk=None):
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+""" 
+
+#Este classe ira mapear as Actions do sistemas, estilo RPC e não tratarão de entidades REST exatamente
+class Actions(APIView):
     def get(self, request, format=None):
         agenda = Agendamento.objects.all()
         serializer = AgendamentoSerializer(agenda, many=True)
@@ -85,7 +142,7 @@ class Agenda(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-""" 
+
 Para criar APIS personalizadas para o Django Rest Framework, não derivadas do ModelViewSet diretamente
 #Exemplo ApiView
 class TesteApi(APIView):

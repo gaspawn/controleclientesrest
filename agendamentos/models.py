@@ -37,6 +37,7 @@ class Servico(models.Model):
     descricao = models.CharField(max_length=200,null=False)
     duracao_prevista = models.IntegerField(default=30)
     ativo = models.BooleanField(default=True) #Utilizado para exclusão lógica
+    pontos = models.IntegerField(default=0) #pontuação virtual do serviço
 
     def __str__(self):
         return self.nome
@@ -50,8 +51,17 @@ class Agendamento(models.Model):
     horario = models.TimeField()
     servico = models.ForeignKey(Servico, on_delete=models.CASCADE, null=False)
     atendente =  models.ForeignKey(Pessoa, on_delete=models.CASCADE,null=False,related_name='atendente_fk')
+    notaServico = models.IntegerField(default=-1) #notas de 0 a 5 com 0 péssimo e 5 muito bom , -1 não opinou
+    comentarioServico = models.CharField(max_length=200,null=True, blank=True,default="")
+    pontuacaoProcessada = models.BooleanField(default=False,null=False)
 
     def __str__(self):
         return self.id
 
-   
+class HistoricoPontosPessoa(models.Model):
+    id = models.AutoField(primary_key=True)
+    dia: models.DateField = models.DateField(null=False)
+    pontos = models.IntegerField(null=False,default=0) # Valor negativo quando usa os pontos
+    descricao = models.CharField(max_length=200,null=False, blank=True)
+    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE,null=False,related_name='pessoa_pontos_fk')
+    

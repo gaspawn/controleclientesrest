@@ -15,6 +15,7 @@ class IsValidClientAction(permissions.BasePermission):
         """
            Verifica se o usuário pode ao menos chamar a view
         """
+        self.verifica_seguranca_criacao_usuario(request, view)
         if request.user.is_authenticated:
             if request.user.is_gerente or request.user.is_atendente or request.user.is_superuser:
                 return True
@@ -41,6 +42,32 @@ class IsValidClientAction(permissions.BasePermission):
                 pessoa: Pessoa = obj
                 return True if pessoa == user else False #cliente só altera seus dados pessoais
             return True
-        else:
+        #else:
+        #    return True
+        elif user.is_gerente or user.is_atendente or user.is_superuser:
             return True
+        return False
+
+    def verifica_seguranca_criacao_usuario(self, request:HttpRequest, view):
+        """
+        Verifica se o usuario que não é gerente esta tentando criar novos atendentes ou gerentes, permitindo apenas que atendente set esta flag quando se
+        tratar dele mesmo
+        """
+        user:Pessoa  = request.user
+        if type(view) == viewsets.PessoaViewSet and view.action in ['create','update','partital_update'] \
+            and (request.POST['is_atendente']  == true or request.POST['is_gerente'] == true):
+            if user.is_authenticated and (user.is_gerente or user.is_superuser):
+                return True
+            elif user.is_authenticated and user.is_atendente and not request.POST['is_gerente'] == 'true' \
+                and user.id == int(request.POST['id']):
+                return True                                
+            else:
+                return False
+        return True
+
+                
+
+
+
+
 

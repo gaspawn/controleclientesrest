@@ -3,6 +3,7 @@ RUN mkdir /app
 WORKDIR /app
 COPY . /app
 RUN pip install -r requirements.txt && python manage.py migrate
+ENV run_in_docker "true"
 ENTRYPOINT [ "python","manage.py","runserver","0.0.0.0:8000" ]
 EXPOSE 8000
 
