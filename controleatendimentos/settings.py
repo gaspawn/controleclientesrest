@@ -143,4 +143,4 @@ AUTH_USER_MODEL = 'agendamentos.Pessoa'
 CORS_ALLOW_ALL_ORIGINS = True
 
 #Com fina das contas free e problemas no githubactions foidesabilitado temporariamente
-#django_on_heroku.settings(locals())
+django_on_heroku.settings(locals())
