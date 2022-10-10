@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import django_on_heroku
 from decouple import config
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -143,4 +144,7 @@ AUTH_USER_MODEL = 'agendamentos.Pessoa'
 CORS_ALLOW_ALL_ORIGINS = True
 
 #Com fina das contas free e problemas no githubactions foidesabilitado temporariamente
-django_on_heroku.settings(locals())
+
+# criada variavel RUN_ON_HEROKU no heroku para app verificar se esta rodando neste ambiente
+if os.environ.get("RUN_ON_HEROKU") is not None:
+    django_on_heroku.settings(locals())
