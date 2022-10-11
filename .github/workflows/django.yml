@@ -43,5 +43,6 @@ jobs:
               heroku_app_name: "controleatendimentos" 
               heroku_email: "gaspawn@gmail.com"
               branch: "main"
+              dontuseforce: 1
 
   
