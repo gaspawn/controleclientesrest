@@ -83,7 +83,7 @@ class SaldoPontosManager(viewsets.ViewSet):
             ** pk é o id da pessoa
     """
     def retrieve(self, request, pk=None):          
-        hoje = date.today()      
+        hoje:datetime = date.today()      
         pessoa = Pessoa.objects.get(pk=pk)
         agendamentos = Agendamento.objects.filter(pessoa=pk,pontuacaoProcessada=False,dia__lte=hoje)
         #filta os agendamentos da pessoa que ainda não foram processados e que a data já tenha sido superada
@@ -91,7 +91,7 @@ class SaldoPontosManager(viewsets.ViewSet):
         #transfere e converte os agendamentos em pontuação e ativa flag de pontuacaoprocessada
         for agendamento in agendamentos:
             agendamento.pontuacaoProcessada = True
-            novoHistorico = HistoricoPontosPessoa(dia=hoje,pessoa=pessoa,pontos=agendamento.pontos,descricao=agendamento.descricao + " em " + agendamento.dia)
+            novoHistorico = HistoricoPontosPessoa(dia=hoje,pessoa=pessoa,pontos=agendamento.servico.pontos,descricao=agendamento.servico.descricao + " em " + agendamento.dia.strftime("%d %m %Y"))
             agendamento.save()
             novoHistorico.save()
 
