@@ -1,0 +1,670 @@
+{
+	"info": {
+		"_postman_id": "7d40e5f7-11b6-471a-8b0c-c07eedf71250",
+		"name": "API PI3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22459292"
+	},
+	"item": [
+		{
+			"name": "Pessoas",
+			"item": [
+				{
+					"name": "Busca as pessoas cadastradas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastra nova pessoa (usuário)",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let resposta = pm.response.json()\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Adiciona o id do parceiro cadastrado numa var de ambiente\", function(){\r",
+									"    pm.expect(resposta).to.haveOwnProperty('id');\r",
+									"    pm.environment.set(\"idUsuarioCadastrado\", resposta.id);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"pessoaTeste05\",\r\n    \"cpf\": \"88984805041\",\r\n    \"first_name\": \"João\",\r\n    \"last_name\": \"Do Teste 01\",\r\n    \"endereco\": \"Rua do teste\",\r\n    \"nascimento\": \"1990-01-01\",\r\n    \"telefone\": 17999999999,\r\n    \"email\": \"teste@teste.com\",\r\n    \"is_atendente\": false,\r\n    \"is_gerente\": false,\r\n    \"new_password\": \"teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca pessoa cadastrada por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/{{idUsuarioCadastrado}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"{{idUsuarioCadastrado}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera o dado de um cadastro realizado",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"pessoaTeste05Alterado\",\r\n    \"cpf\": \"88984805041\",\r\n    \"first_name\": \"João\",\r\n    \"last_name\": \"Do Teste 01\",\r\n    \"endereco\": \"Rua do teste\",\r\n    \"nascimento\": \"1990-01-01\",\r\n    \"telefone\": 17999999999,\r\n    \"email\": \"teste@teste.com\",\r\n    \"is_atendente\": false,\r\n    \"is_gerente\": false,\r\n    \"new_password\": \"teste\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/{{idUsuarioCadastrado}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"{{idUsuarioCadastrado}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta uma pessoa cadastrada",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pessoas/{{idUsuarioCadastrado}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pessoas",
+								"{{idUsuarioCadastrado}}",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Servicos",
+			"item": [
+				{
+					"name": "Busca os serviços cadastrados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/servicos",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"servicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastra um serviço",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let resposta = pm.response.json()\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Adiciona o id do serviço cadastrado numa var de ambiente\", function(){\r",
+									"    pm.expect(resposta).to.haveOwnProperty('id');\r",
+									"    pm.environment.set(\"idServicoCadastrado\", resposta.id);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Teste postman 02\",\r\n    \"descricao\": \"só um teste cara\",\r\n    \"duracao_prevista\": 10,\r\n    \"ativo\": false,\r\n    \"pontos\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/servicos/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"servicos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca um serviço por id específico",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/servicos/{{idServicoCadastrado}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"servicos",
+								"{{idServicoCadastrado}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera um serviço cadastrado",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"nome\": \"Teste postman 02 ALTERADO\",\r\n    \"descricao\": \"só um teste cara\",\r\n    \"duracao_prevista\": 10,\r\n    \"ativo\": false,\r\n    \"pontos\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/servicos/{{idServicoCadastrado}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"servicos",
+								"{{idServicoCadastrado}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta um serviço cadastrado",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/servicos/{{idServicoCadastrado}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"servicos",
+								"{{idServicoCadastrado}}",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Token",
+			"item": [
+				{
+					"name": "Obtem o token do admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let resposta = pm.response.json()\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(resposta).to.haveOwnProperty(\"access\");\r",
+									"    pm.environment.set(\"adminToken\", resposta.access);\r",
+									"\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/token/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"token",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Agendamentos",
+			"item": [
+				{
+					"name": "Cadastra um agendamento",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let resposta = pm.response.json()\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Adiciona o id do agendamento cadastrado numa var de ambiente\", function(){\r",
+									"    pm.expect(resposta).to.haveOwnProperty('id');\r",
+									"    pm.environment.set(\"idAgendamentoCadastrado\", resposta.id);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dia\": \"2020-10-10\",\r\n    \"horario\": \"10:10:10\",\r\n    \"notaServico\": 0,\r\n    \"comentarioServico\": \"\",\r\n    \"pontuacaoProcessada\": false,\r\n    \"pessoa\": {{idUsuarioCadastrado}},\r\n    \"servico\": {{idServicoCadastrado}},\r\n    \"atendente\": {{idUsuarioCadastrado}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/agendamentos/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"agendamentos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca os agendamentos realizados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/agendamentos/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"agendamentos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca agendamento por id do agendamento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/agendamentos/{{idAgendamentoCadastrado}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"agendamentos",
+								"{{idAgendamentoCadastrado}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera os dados de um agendamento cadastrado",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"id\": {{idAgendamentoCadastrado}},\r\n        \"dia\": \"2020-10-10\",\r\n        \"horario\": \"10:10:10\",\r\n        \"notaServico\": 5,\r\n        \"comentarioServico\": \"\",\r\n        \"pontuacaoProcessada\": false,\r\n        \"pessoa\": 6,\r\n        \"servico\": 8,\r\n        \"atendente\": 6\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/agendamentos/{{idAgendamentoCadastrado}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"agendamentos",
+								"{{idAgendamentoCadastrado}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta um agendamento",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/agendamentos/{{idAgendamentoCadastrado}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"agendamentos",
+								"{{idAgendamentoCadastrado}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca agendamento por id da pessoa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/agendamentos/?pessoa=2",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"agendamentos",
+								""
+							],
+							"query": [
+								{
+									"key": "pessoa",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Busca agendamento por dia",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/agendamentos/?dia=2020-10-20",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"agendamentos",
+								""
+							],
+							"query": [
+								{
+									"key": "dia",
+									"value": "2020-10-20"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pontuacao",
+			"item": [
+				{
+					"name": "Cadastra pontuacao",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let resposta = pm.response.json()\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Adiciona o id da pontuação cadastrada numa var de ambiente\", function(){\r",
+									"    pm.expect(resposta).to.haveOwnProperty('id');\r",
+									"    pm.environment.set(\"idPontuacaoCadastrada\", resposta.id);\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"dia\": \"2022-10-12\",\r\n    \"pontos\": 1,\r\n    \"descricao\": \"Teste Postman\",\r\n    \"pessoa\": {{idUsuarioCadastrado}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pontuacao/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pontuacao",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorna todas as pontuações cadastradas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pontuacao",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pontuacao"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retorna as informações de uma informação por id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pontuacao/{{idPontuacaoCadastrada}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pontuacao",
+								"{{idPontuacaoCadastrada}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Altera as informações de uma pontuação cadastrada",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{idPontuacaoCadastrada}},\r\n    \"dia\": \"2022-10-12\",\r\n    \"pontos\": 5,\r\n    \"descricao\": \"Teste Postman\",\r\n    \"pessoa\": 6\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/pontuacao/{{idPontuacaoCadastrada}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pontuacao",
+								"{{idPontuacaoCadastrada}}",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deleta uma pontuação cadastrada",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/pontuacao/{{idPontuacaoCadastrada}}/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"pontuacao",
+								"{{idPontuacaoCadastrada}}",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Saldo",
+			"item": [
+				{
+					"name": "Retorna o saldo do usuario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/saldo/{{idUsuarioCadastrado}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"saldo",
+								"{{idUsuarioCadastrado}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
