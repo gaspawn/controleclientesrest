@@ -1,0 +1,107 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-09-17T18:51:10.229Z",
+    "end": "2022-09-17T18:51:10.611Z",
+    "duration": 382,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e7c348a3-70d6-4e2f-8728-57f63eef41c4",
+      "title": "",
+      "fullFile": "cypress/integration/usuarios.spec.js",
+      "file": "cypress/integration/usuarios.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "868f756c-ee06-4944-b137-3b605e3082e1",
+          "title": "Casos de teste sobre a rota /usuarios da API serverest",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Deve realizar login com sucesso",
+              "fullTitle": "Casos de teste sobre a rota /usuarios da API serverest Deve realizar login com sucesso",
+              "timedOut": null,
+              "duration": 371,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.buscarUsuarioParaLogin().then(usuario => {\n  cy.logar(usuario.email, usuario.senha).then(res => {\n    expect(res).to.be.a('object');\n    expect(res.body.message).to.be.a('string');\n    expect(res.body.message).to.equal('Login realizado com sucesso');\n    expect(res.body).to.haveOwnProperty('authorization');\n    let bearer = res.body.authorization.slice(7);\n    cy.log(bearer);\n  });\n});",
+              "err": {},
+              "uuid": "658298ea-ae3a-4305-8ff1-86d6003fdae8",
+              "parentUUID": "868f756c-ee06-4944-b137-3b605e3082e1",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "658298ea-ae3a-4305-8ff1-86d6003fdae8"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 371,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

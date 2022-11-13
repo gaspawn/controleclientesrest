@@ -1,0 +1,39 @@
+{
+  "name": "challengefinal_douglastoseto_compass",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:open:prod": "cypress open --env configFile=prod",
+    "cy:run:prod": "cypress run --env configFile=prod",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean:reports": "rmdir /S /Q cypress\\reports && mkdir cypress\\reports && mkdir cypress\\reports\\mochareports"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Douglas-Toseto/ChallengeFinal_DouglasToseto_Compass.git"
+  },
+  "keywords": [],
+  "author": "Douglas Toseto",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Douglas-Toseto/ChallengeFinal_DouglasToseto_Compass/issues"
+  },
+  "homepage": "https://github.com/Douglas-Toseto/ChallengeFinal_DouglasToseto_Compass#readme",
+  "devDependencies": {
+    "@faker-js/faker": "^7.5.0",
+    "ajv": "^8.11.0",
+    "cypress": "^9.7.0",
+    "cypress-mochawesome-reporter": "^3.2.2",
+    "cypress-multi-reporters": "^1.6.1",
+    "mocha": "^10.0.0",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.2.1",
+    "mochawesome-report-generator": "^6.2.0"
+  },
+  "dependencies": {
+    "gerador-validador-cpf": "^5.0.2"
+  }
+}

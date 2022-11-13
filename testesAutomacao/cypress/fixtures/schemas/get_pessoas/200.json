@@ -1,0 +1,58 @@
+{
+    "type": "array",
+    "items": {
+        "type": "object",
+        "required": [
+            "id",
+            "username",
+            "cpf",
+            "first_name",
+            "last_name",
+            "endereco",
+            "nascimento",
+            "telefone",
+            "email",
+            "is_atendente",
+            "is_gerente",
+            "new_password"
+        ],
+        "properties": {
+            "id": {
+                "type": "integer"
+            },
+            "username": {
+                "type": "string"
+            },
+            "cpf": {
+                "type": "string"
+            },
+            "first_name": {
+                "type": "string"
+            },
+            "last_name": {
+                "type": ["string", "null"]
+            },
+            "endereco": {
+                "type": ["string", "null"]
+            },
+            "nascimento": {
+                "type": ["string", "null"]
+            },
+            "telefone": {
+                "type": ["string", "null"]
+            },
+            "email": {
+                "type": ["string", "null"]
+            },
+            "is_atendente": {
+                "type": "boolean"
+            },
+            "is_gerente": {
+                "type": "boolean"
+            },
+            "new_password": {
+                "type": ["string", "null"]
+            }
+        }
+    }
+}

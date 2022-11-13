@@ -1,0 +1,147 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-09-17T18:51:06.547Z",
+    "end": "2022-09-17T18:51:07.282Z",
+    "duration": 735,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "945eb1e6-54b0-4d63-820d-39ddd74015f5",
+      "title": "",
+      "fullFile": "cypress/integration/3.produtos.spec.js",
+      "file": "cypress/integration/3.produtos.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "44b98467-b99f-490d-b0a7-c6e860190c42",
+          "title": "Casos de teste relacionados a rota /produtos da API Serverest",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Deve retornar todos os produtos cadastrados",
+              "fullTitle": "Casos de teste relacionados a rota /produtos da API Serverest Deve retornar todos os produtos cadastrados",
+              "timedOut": null,
+              "duration": 198,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "_serverest.default.buscarProdutos().then(res => {\n  _validaServerest.default.validarBuscaProdutos(res);\n});",
+              "err": {},
+              "uuid": "47c52b28-ef7f-4c2b-a37a-c541ae7d5d39",
+              "parentUUID": "44b98467-b99f-490d-b0a7-c6e860190c42",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [
+            {
+              "uuid": "7a888021-da21-4e40-9f5f-a80b0cbb5e0b",
+              "title": "Logar com sucesso",
+              "fullFile": "",
+              "file": "",
+              "beforeHooks": [],
+              "afterHooks": [],
+              "tests": [
+                {
+                  "title": "Deve cadastrar um produto com sucesso",
+                  "fullTitle": "Casos de teste relacionados a rota /produtos da API Serverest Logar com sucesso Deve cadastrar um produto com sucesso",
+                  "timedOut": null,
+                  "duration": 524,
+                  "state": "passed",
+                  "speed": "fast",
+                  "pass": true,
+                  "fail": false,
+                  "pending": false,
+                  "context": null,
+                  "code": "_serverest.default.cadastrarProdutoComSucesso().then(res => {\n  _validaServerest.default.validaCadastrarProdutoComSucesso(res);\n});",
+                  "err": {},
+                  "uuid": "47e730b9-3ad8-4850-9026-bb929965b929",
+                  "parentUUID": "7a888021-da21-4e40-9f5f-a80b0cbb5e0b",
+                  "isHook": false,
+                  "skipped": false
+                }
+              ],
+              "suites": [],
+              "passes": [
+                "47e730b9-3ad8-4850-9026-bb929965b929"
+              ],
+              "failures": [],
+              "pending": [],
+              "skipped": [],
+              "duration": 524,
+              "root": false,
+              "rootEmpty": false,
+              "_timeout": 2000
+            }
+          ],
+          "passes": [
+            "47c52b28-ef7f-4c2b-a37a-c541ae7d5d39"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 198,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

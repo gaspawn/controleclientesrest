@@ -1,0 +1,11 @@
+{
+    "$schema": "https://on.cypress.io/cypress.schema.json",
+    "video": false,
+    "videoWidth": 1600,
+    "videoHeight": 900,
+    "chromeWebSecurity": false,
+    "numTestsKeptInMemory": 5,
+    "screenshotsFolder": "reports/screenshots",
+    "reporter": "cypress-mochawesome-reporter"
+    
+}

@@ -1,0 +1,88 @@
+{
+  "stats": {
+    "suites": 0,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-09-17T18:51:08.272Z",
+    "end": "2022-09-17T18:51:08.480Z",
+    "duration": 208,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "394fc6e3-dc5d-4eea-ad0d-06bd4281f2ab",
+      "title": "",
+      "fullFile": "cypress/integration/test.spec.js",
+      "file": "cypress/integration/test.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [
+        {
+          "title": "Deve realizar um request GET na rota /usuarios",
+          "fullTitle": "Deve realizar um request GET na rota /usuarios",
+          "timedOut": null,
+          "duration": 199,
+          "state": "passed",
+          "speed": "fast",
+          "pass": true,
+          "fail": false,
+          "pending": false,
+          "context": null,
+          "code": "cy.request('/usuarios').then(res => {\n  expect(res).to.be.a('object');\n  cy.log(JSON.stringify(res));\n});",
+          "err": {},
+          "uuid": "74c9c6fd-80f6-40c0-80e5-ec2e57bda521",
+          "parentUUID": "394fc6e3-dc5d-4eea-ad0d-06bd4281f2ab",
+          "isHook": false,
+          "skipped": false
+        }
+      ],
+      "suites": [],
+      "passes": [
+        "74c9c6fd-80f6-40c0-80e5-ec2e57bda521"
+      ],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 199,
+      "root": true,
+      "rootEmpty": false,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

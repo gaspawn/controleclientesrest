@@ -1,0 +1,145 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2022-09-17T18:50:58.865Z",
+    "end": "2022-09-17T18:50:59.674Z",
+    "duration": 809,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "15d577e2-df3a-49a9-952d-b8ee553232f2",
+      "title": "",
+      "fullFile": "cypress/integration/1.usuarios.spec.js",
+      "file": "cypress/integration/1.usuarios.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "9ffb8bbc-236d-4432-a623-444e75874390",
+          "title": "Casos de teste relacionados a rota /usuarios da API Serverest",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Deve retornar todos os usuários cadastrados, fazer validação de contrato e salvar um num json",
+              "fullTitle": "Casos de teste relacionados a rota /usuarios da API Serverest Deve retornar todos os usuários cadastrados, fazer validação de contrato e salvar um num json",
+              "timedOut": null,
+              "duration": 420,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//teste para a rota: GET /usuarios\n_serverest.default.buscarUsuarios().then(res => {\n  cy.contractValidation(res, 'get_usuarios', 200); //podemos criar outras validações além da validação de contrato\n  //ValidaServerest.validarBuscaUsuario(res);\n  cy.writeFile('cypress/fixtures/usuario.json', res.body.usuarios[res.body.usuarios.length - 1]); //salvando o último usuário cadastrado\n});",
+              "err": {},
+              "uuid": "a65ef022-1cf6-4118-8739-818ae6de41e6",
+              "parentUUID": "9ffb8bbc-236d-4432-a623-444e75874390",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve buscar um usuário específico por ID",
+              "fullTitle": "Casos de teste relacionados a rota /usuarios da API Serverest Deve buscar um usuário específico por ID",
+              "timedOut": null,
+              "duration": 190,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//teste para rota: GET /usuarios/{_id}\ncy.fixture('usuario.json').then(arquivo => {\n  let id = arquivo._id;\n  _serverest.default.buscarUsuario(id).then(res => {\n    _validaServerest.default.validarBuscaUsuarioId(res);\n  });\n});",
+              "err": {},
+              "uuid": "8b3e3c2b-2f1c-4341-9fc7-a61d2ba297f9",
+              "parentUUID": "9ffb8bbc-236d-4432-a623-444e75874390",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Deve realizar a busca de um usuário de um arquivo Json e realizar login",
+              "fullTitle": "Casos de teste relacionados a rota /usuarios da API Serverest Deve realizar a busca de um usuário de um arquivo Json e realizar login",
+              "timedOut": null,
+              "duration": 180,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//realiza um login com o último usuário cadastrado (que foi salvo no Json)\ncy.fixture('usuario.json').then(arquivo => {\n  // não vou deixar esse caso teste no arquivo de Login, pq está dependendo do caso anterior para atualizar o usuário\n  let usuario = {\n    \"email\": arquivo.email,\n    \"password\": arquivo.password\n  };\n  _serverest.default.logar(usuario).then(res => {\n    _validaServerest.default.validarLoginComSucesso(res);\n    _serverest.default.salvarToken(res);\n  });\n});",
+              "err": {},
+              "uuid": "27c30dc1-044a-4d56-bb7c-fc595bde6a57",
+              "parentUUID": "9ffb8bbc-236d-4432-a623-444e75874390",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "a65ef022-1cf6-4118-8739-818ae6de41e6",
+            "8b3e3c2b-2f1c-4341-9fc7-a61d2ba297f9",
+            "27c30dc1-044a-4d56-bb7c-fc595bde6a57"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 790,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports/mocha",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
